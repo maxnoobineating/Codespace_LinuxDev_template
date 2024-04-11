@@ -1,0 +1,39 @@
+# This is a Dockerfile template with explanations for each instruction.
+# Customize it according to your project's requirements.
+
+# Use an official base image (e.g., Ubuntu, Alpine, etc.)
+# Specify the version/tag to ensure reproducibility.
+FROM ubuntu:latest
+
+# Set metadata for the image (optional but recommended)
+LABEL maintainer="Maxium <zsdezsc@gmail.com>"
+LABEL description="Linux Devcontainer"
+
+# Install system packages and dependencies
+RUN apt-get update && \
+    apt-get install -y \
+        build-essential \
+        # Add more packages here as needed
+RUN apt install wget git curl vim tmux zsh -y
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+RUN chsh -s $(which zsh)
+
+# Set environment variables (optional but useful)
+ENV APP_HOME=/app
+ENV PORT=8080
+
+# Create a working directory
+WORKDIR $APP_HOME
+
+# Copy application files into the container
+COPY . $APP_HOME
+
+# Expose a port (if your application listens on a specific port)
+EXPOSE $PORT
+
+# Run any build or setup commands (e.g., compiling code)
+RUN make /app
+
+# Specify the default command to run when the container starts
+CMD ["python", "/app/app.py"]
+
