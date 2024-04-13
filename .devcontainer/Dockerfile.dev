@@ -27,6 +27,9 @@ RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUS
 # Zsh-z
 RUN git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z
 
+# dotfile configuration
+echo "plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-z)" >> ~/.zshrc && source ~/.zshrc
+
 # Set environment variables (optional but useful)
 ENV APP_HOME=/app
 ENV PORT=8080
