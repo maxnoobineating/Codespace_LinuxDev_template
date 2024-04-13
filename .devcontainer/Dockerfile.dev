@@ -35,10 +35,10 @@ ENV APP_HOME=/app
 ENV PORT=8080
 
 # Create a working directory
-WORKDIR $APP_HOME
+# WORKDIR $APP_HOME
 
 # Copy application files into the container
-COPY . $APP_HOME
+# COPY . $APP_HOME
 
 # Expose a port (if your application listens on a specific port)
 EXPOSE $PORT
