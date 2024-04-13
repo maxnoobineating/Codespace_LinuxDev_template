@@ -16,7 +16,16 @@ RUN apt-get update && \
         # Add more packages here as needed
 RUN apt install wget git curl vim tmux zsh -y
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-RUN chsh -s $(which zsh)
+
+# oh-my-zsh plugin download
+# powerlevel10k
+RUN git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+# autosuggestions
+RUN git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# syntax highlighting
+RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# Zsh-z
+RUN git clone https://github.com/agkozak/zsh-z $ZSH_CUSTOM/plugins/zsh-z
 
 # Set environment variables (optional but useful)
 ENV APP_HOME=/app
@@ -32,8 +41,9 @@ COPY . $APP_HOME
 EXPOSE $PORT
 
 # Run any build or setup commands (e.g., compiling code)
-RUN make /app
+# RUN make /app
+ENV SHELL /bin/zsh
 
 # Specify the default command to run when the container starts
-CMD ["python", "/app/app.py"]
+# CMD ["python", "/app/app.py"]
 
