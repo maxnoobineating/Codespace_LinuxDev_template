@@ -9,3 +9,6 @@ FROM ${BASE_IMAGE}
 # Install system packages and dependencies
 RUN apt-get update && apt-get upgrade -y
         # Add more packages here as needed
+
+# Unminimize the image, only for one time use
+# RUN yes | unminimize

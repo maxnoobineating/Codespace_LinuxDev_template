@@ -1,6 +1,7 @@
 # secondary build for remaining env setup
 # docker build -t ubuntu_devcontainer:latest -f ./dotfile_setup.dockerfile .
-FROM ubuntu-base-image:latest
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE}
 RUN curl -sSL https://gist.github.com/maxnoobineating/e42e875d0360dec9122ab5d088e66fd0.txt | /bin/zsh
 
 # Set environment variables (optional but useful)
