@@ -9,7 +9,7 @@ function New-DevContainer {
     )
     # docker run -itd --name $Name -v "$Volume":/root/"$Volume" -v 
     # docker run -itd --name $Name -v "$Volume":/root/"$Volume" -v  <path to: C:\Windows\System32\clip.exe>:/mnt/c/Windows/System32/clip.exe $Image
-    docker create -itd --name $Name -v "${Volume}:/root/${Volume}" -v "C:\Windows\System32\clip.exe:/mnt/c/Windows/System32/clip.exe" $Image
+    docker create -it --name $Name -v "${Volume}:/root/${Volume}" -v "C:\Windows\System32\clip.exe:/mnt/c/Windows/System32/clip.exe" $Image
     "Container $Name created from $Image"
 }
 
